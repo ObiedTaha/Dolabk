@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
 import { HeaderComponent } from './components/header/header.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 
@@ -10,10 +13,14 @@ import { HeaderComponent } from './components/header/header.component';
   declarations: [],
   imports: [
     CommonModule,
-    HeaderComponent
+    HeaderComponent,
+    SpinnerComponent,
+    HttpClientModule
+
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    SpinnerComponent
   ]
 })
-export class SharedModule {}
+export class SharedModule { }
