@@ -1,29 +1,34 @@
 <div class="box mt-3">
-    <div class="my-2 w-25">
-        <label for="" class="my-1">Categories :</label>
-        <select class="form-control" (change)="filterCategory($event)">
-            <option value="all" selected >All</option>
-            <option value="{{option}}" *ngFor="let option of categories"> {{option}} </option>
-        </select>
-    </div>
-    <div class="row" *ngIf="">
-        <div class="col-xl-3 col-md-4 col-sm-6" *ngFor="let product of products">
-            <div class="item p-2">
-                <img class="w-100" src="{{product.image}}" alt="{{product.title}}">
-                <div class="body">
-                    <h4> {{product.title}} </h4>
-                    <p> {{product.description}} </p>
-                </div>
-                <div class="px-3 mb-2 d-flex justify-content-between align-items-center">
-                    <button class="btn btn-success">Add To Cart</button>
-                    <span> {{product.price}} $</span>
+    <div class="my-2">
+        <div class="collection-content">
+            <div class="row py-3">
+                <div class="col-12">
+                  <div class="collection-header">
+                    <h3 class="text-center">Latest Products</h3>
+                    <ul class="d-flex my-5 justify-content-center desktop-header">
+                      <li (click)="getProducts()">All</li>
+                      <li *ngFor="let category of categories" (click)="getProductsOfCategory($event)">{{category}}</li>
+                    </ul>
+                    <div class="select mobile-header my-3">
+                      <!-- this line contain transfer between parent and child components -->
+                      <!-- select component -->
+                      <app-select [data]="categories" [title]="'Categories'" (selectValue)="filterCategory($event)">
+                      </app-select>
+                    </div>
+                  </div>
                 </div>
             </div>
+            
+        </div>
+
+    </div>
+    <div class="row" *ngIf="!loader">
+        <div class="col-sm-6 col-md-4 col-lg-3 p-2" *ngFor="let product of products">
+            <app-products-card [data]="product"></app-products-card>
         </div>
     </div>
 
-    <div class="text-center w-100">
+    <div class=" w-100 text-center" *ngIf="loader">
         <app-spinner></app-spinner>
     </div>
-
 </div>

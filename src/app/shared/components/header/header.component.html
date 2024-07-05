@@ -1,11 +1,28 @@
-<nav>
-    <div class="container">
-        <div class="content">
-            <h2 class="logo">Dolabk</h2>
-            <ul>
-                <li routerLink="products">Products</li>
-                <li routerLink="/cart">Cart</li>
-            </ul>
+<div class="header-content">
+    <div id="carouselExampleIndicators" class="carousel slide w-100 h-100" data-bs-ride="true">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="../../../../assets/images/home_bg_1.jpg" alt="home_bg_1">
+          <div class="layer">
+            <h5>Upto 60% Discount</h5>
+            <p>Winter Stock Summer <br> Collection</p>
+            <button class="btn" [routerLink]="['/collections']">View More</button>
+          </div>
         </div>
+        <div class="carousel-item">
+          <img src="../../../../assets/images/home_bg_2.jpg" alt="home_bg_2">
+          <div class="layer">
+            <h5>Best Relexing Collection</h5>
+            <p>Exclusive Cool Summer <br> Collection</p>
+            <button class="btn" [routerLink]="['/collections']">View More</button>
+          </div>
+        </div>
+      </div>
     </div>
-</nav>
+  </div>

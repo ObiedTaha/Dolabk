@@ -1,26 +1,32 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductsService {
-  
-  constructor(private http:HttpClient) { }
-  BaseUrl:string=`https://fakestoreapi.com/`;
+  constructor(private http: HttpClient) { }
+  BaseUrl: any = `https://fakestoreapi.com/`;
 
-  getAllProducts():Observable<any>{
+  // 1- get all products
+  getAllProducts(): Observable<any> {
     return this.http.get(`${this.BaseUrl}products`);
-  };
+  }
 
-  getAllCategories():Observable<any>
-  {
-    return this.http.get(`${this.BaseUrl}products/categories`)
-  };
+  // 2- get all categories
+  getAllCategories(): Observable<any> {
+    return this.http.get(`${this.BaseUrl}products/categories`);
+  }
 
-  getSpecificCategory(category:string):Observable<any>{
-    return this.http.get(`${this.BaseUrl}products/category/${category}`);
-  };
+  // 3- get specific category
+  getSpecificCategory(value: any): Observable<any> {
+    return this.http.get(`${this.BaseUrl}products/category/${value}`);
+  }
 
+  // get single product details
+  getProductDetails(id: number): Observable<any> {
+    return this.http.get(`${this.BaseUrl}products/${id}`);
+  }
 }

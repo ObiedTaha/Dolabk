@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsService } from '../../services/products.service';
-import { Product } from 'src/app/shared/interfaces/product';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { SelectComponent } from 'src/app/shared/components/select/select.component';
+import { ProductsCardComponent } from 'src/app/shared/components/products-card/products-card.component';
+import { IProduct } from 'src/app/shared/interfaces/iproduct';
 
 @Component({
   selector: 'app-all-products',
   standalone: true,
-  imports: [CommonModule,SpinnerComponent],
+  imports: [CommonModule, SpinnerComponent,SelectComponent,ProductsCardComponent],
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.scss']
 })
 export class AllProductsComponent implements OnInit {
   constructor(private _ProductsService: ProductsService) { }
 
-  products: Product[] = [];
+  products: IProduct[] = [];
   categories: any[] = [];
+  loader: boolean = false;
 
   ngOnInit() {
     this.getProducts();
@@ -23,22 +26,28 @@ export class AllProductsComponent implements OnInit {
   }
 
   getProducts() {
+    this.loader = true;
     this._ProductsService.getAllProducts().subscribe({
       next: (response) => {
-        this.products = response
+        this.products = response;
+        this.loader = false;
       },
       error: (err) => {
-        alert(err.message)
+        this.loader = false;
+        alert(err.message);
+
       }
     })
   }
 
   getCategories() {
+    this.loader = true;
     this._ProductsService.getAllCategories().subscribe({
       next: (response) => {
         this.categories = response;
       },
       error: (err) => {
+        this.loader = false;
         alert(err);
       }
     })
@@ -50,18 +59,23 @@ export class AllProductsComponent implements OnInit {
   }
 
   getProductsCategory(keyword: string) {
+    this.loader = true;
     this._ProductsService.getSpecificCategory(keyword).subscribe({
       next: (response) => {
         console.log(response);
         this.products = response;
+        this.loader = false;
       },
       error: (err) => {
         console.log(err);
-
+        this.loader = false;
       }
     })
   }
 
-
+  getProductsOfCategory(event: any) {
+    let value = event.target.innerHTML;
+    this.getProductsCategory(value);
+  }
 
 }
