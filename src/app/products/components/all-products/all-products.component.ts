@@ -4,12 +4,14 @@ import { ProductsService } from '../../services/products.service';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 import { SelectComponent } from 'src/app/shared/components/select/select.component';
 import { ProductsCardComponent } from 'src/app/shared/components/products-card/products-card.component';
+
+import { RouterLink } from '@angular/router';
 import { IProduct } from 'src/app/shared/interfaces/iproduct';
 
 @Component({
   selector: 'app-all-products',
   standalone: true,
-  imports: [CommonModule, SpinnerComponent,SelectComponent,ProductsCardComponent],
+  imports: [CommonModule, RouterLink,SpinnerComponent, SelectComponent, ProductsCardComponent],
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.scss']
 })
@@ -19,6 +21,7 @@ export class AllProductsComponent implements OnInit {
   products: IProduct[] = [];
   categories: any[] = [];
   loader: boolean = false;
+  cartProducts: any[] = [];
 
   ngOnInit() {
     this.getProducts();
@@ -76,6 +79,23 @@ export class AllProductsComponent implements OnInit {
   getProductsOfCategory(event: any) {
     let value = event.target.innerHTML;
     this.getProductsCategory(value);
+  }
+
+  addToCart(event: any) {
+    console.log(event);
+    if (localStorage.getItem('cart') != null) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cart')!)
+      let exist = this.cartProducts.find(item => item.item.id == event.item.id)
+      if (!exist) {
+        this.cartProducts.push(event);
+        localStorage.setItem('cart', JSON.stringify(this.cartProducts))
+      } else {
+        alert('Prouduct already add');
+      }
+    } else {
+      this.cartProducts.push(event);
+      localStorage.setItem('cart', JSON.stringify(this.cartProducts))
+    }
   }
 
 }

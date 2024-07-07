@@ -15,7 +15,10 @@ export class ProductsCardComponent {
 
   // @Input() data:any={};
   @Input() data!: IProduct;
+
+
   @Output() item = new EventEmitter();
+
   addButton: boolean = false;
   amount: number = 1;
   constructor() { }
@@ -24,7 +27,7 @@ export class ProductsCardComponent {
 
   // send item clicked and amout to parent
   add() {
-    this.item.emit({ data: this.data, quantity: this.amount });
+    this.item.emit({ item: this.data, quantity: this.amount });
   }
 
   added() {

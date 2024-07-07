@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { HeaderComponent } from './components/header/header.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SelectComponent } from './components/select/select.component';
 import { ProductsCardComponent } from './components/products-card/products-card.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './header/header.component';
 
 
 
@@ -23,7 +24,8 @@ import { FooterComponent } from './components/footer/footer.component';
     SelectComponent,
     ProductsCardComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
 
   ],
   exports: [
@@ -32,7 +34,8 @@ import { FooterComponent } from './components/footer/footer.component';
     SelectComponent, 
     ProductsCardComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
   ]
 })
 export class SharedModule { }
