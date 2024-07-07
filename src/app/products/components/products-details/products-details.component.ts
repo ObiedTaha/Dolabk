@@ -8,15 +8,15 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
 @Component({
   selector: 'app-products-details',
   standalone: true,
-  imports: [CommonModule,SpinnerComponent],
+  imports: [CommonModule, SpinnerComponent],
   templateUrl: './products-details.component.html',
   styleUrls: ['./products-details.component.scss']
 })
 export class ProductsDetailsComponent implements OnInit {
   id: any;
-  product: any = {};
+  product!: IProduct;
   loading: boolean = false;
-  constructor(private _ActivatedRoute: ActivatedRoute, private _ProductsService: ProductsService) {}
+  constructor(private _ActivatedRoute: ActivatedRoute, private _ProductsService: ProductsService) { }
 
   ngOnInit() {
     this.id = this._ActivatedRoute.snapshot.paramMap.get('id');
@@ -24,14 +24,14 @@ export class ProductsDetailsComponent implements OnInit {
   }
 
   getProductDetails(): void {
-    this.loading=true;
+    this.loading = true;
     this._ProductsService.getProductDetails(this.id).subscribe({
       next: (response) => {
-        this.product=response;
-        this.loading=false;
+        this.product = response;
+        this.loading = false;
       },
-      error:(err)=>{
-        this.loading=false;
+      error: (err) => {
+        this.loading = false;
       }
     })
   }

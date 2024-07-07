@@ -1,1 +1,51 @@
-<p>cart works!</p>
+<div class="cartBox my-4 container" *ngIf="!success">
+    <h1 class="text-danger">Shopping Cart</h1>
+    <div class="headCart">
+        <p class="lead">You Have <label class="text-danger fw-bold"> {{cartProducts.length}} </label> Item in your cart</p>
+        <span class="text-danger card-header" (click)="clearAllProducts()">Clear Shopping Cart</span>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Price</th>
+                <th class="w-25">Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of cartProducts;index as i">
+                <td> <img src="{{item.item.image}}" alt=""> </td>
+                <td>{{item.item.title}}</td>
+                <td>{{item.item.price | currency:' $'}} </td>
+                <td>
+                    <div class="quantity">
+                        <button class="btn btn-sm btn-dark" (click)="addAmount(i)">+</button>
+                        <input type="number" class="form-control" (change)="detectChange()" name="number" [(ngModel)]="item.quantity">
+                        <button class="btn btn-sm btn-dark" (click)="minsAmount(i)">-</button>
+                    </div>
+                </td>
+                <td> {{item.item.price *item.quantity | currency:'$'}} </td>
+                <td>
+                    <button class="btn btn-sm btn-danger" (click)="deleteProduct(i)"> Delete</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Tootal :{{totalPrice |currency:'$'}}</th>
+                <th> <button class="btn btn-sm btn-success" (click)="addCart()">Order Now</button> </th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="alert alert-success my-4" role="alert" *ngIf="success">
+    <h4 class="alert-heading">well done! </h4>
+    <p>Your order is successfully send</p>
+</div>

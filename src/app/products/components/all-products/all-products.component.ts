@@ -19,7 +19,7 @@ export class AllProductsComponent implements OnInit {
   constructor(private _ProductsService: ProductsService) { }
 
   products: IProduct[] = [];
-  categories: any[] = [];
+  categories: string[] = [];
   loader: boolean = false;
   cartProducts: any[] = [];
 
@@ -82,8 +82,7 @@ export class AllProductsComponent implements OnInit {
   }
 
   addToCart(event: any) {
-    console.log(event);
-    if (localStorage.getItem('cart') != null) {
+    if ('cart' in localStorage) {
       this.cartProducts = JSON.parse(localStorage.getItem('cart')!)
       let exist = this.cartProducts.find(item => item.item.id == event.item.id)
       if (!exist) {
