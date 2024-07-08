@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'productDetails/:id', loadComponent: () => import('./products/components/products-details/products-details.component').then(m => m.ProductsDetailsComponent), title: 'Product Details' },
   { path: 'cart', loadComponent: () => import('./carts/components/cart/cart.component').then(m => m.CartComponent), title: 'Cart' },
   {path:'contacts',loadComponent:()=>import('./components/contacts/contacts.component').then(m=>m.ContactsComponent),title:'Contacts'},
+  {path:'about',loadComponent:()=>import('./components/aboutus/aboutus.component').then(m=>m.AboutusComponent),title:'About Us'},
   { path: '**', loadComponent: () => import('./shared/components/notfound/notfound.component').then(m => m.NotfoundComponent), title: 'Not Found' }
 ];
 
